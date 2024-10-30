@@ -1,0 +1,14 @@
+{
+    "name": "Test Scraper", 
+    "image": "logo.png", 
+    "originURL": "https://uwwave.ca", 
+    "lastUpdated": 123123123123,
+    "main": "index.js",
+    "options" : [
+        {
+            "label": "Jobs to generate",
+            "type": "Select",
+            "selectOptions": ["10", "50", "100", "1000", "10000" ]
+        }
+    ]
+}

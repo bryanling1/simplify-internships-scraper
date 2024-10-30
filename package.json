@@ -1,0 +1,24 @@
+{
+  "name": "scrapers-api",
+  "version": "1.0.0",
+  "description": "Dummy web scraper that generates random jobs for InternWave's desktop application",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "yarn copyREADME && yarn copyCHANGELOG && tsup --publicDir --watch",
+    "copyREADME": "copyfiles README.md public",
+    "copyCHANGELOG": "copyfiles CHANGELOG.md public"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@internwave/scrapers-api": "^1.0.0",
+    "tsup": "^8.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
