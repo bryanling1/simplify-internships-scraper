@@ -1,7 +1,8 @@
 {
     "name": "Test Scraper", 
     "image": "logo.png", 
-    "originURL": "https://uwwave.ca", 
+    "originURL": "https://internwave.com", 
+    "sourceURL": "https://github.com/bryanling1/internwave-test-scraper",
     "lastUpdated": 123123123123,
     "main": "index.js",
     "options" : [

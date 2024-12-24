@@ -1,5 +1,5 @@
 # InternWave Desktop Test scraper
-A bare minimum "scraper" for InternWave Desktop to be used for devleopment purposes.
+A bare minimum "scraper" for [InternWave Desktop](https://internwave.com/) to be used for devleopment purposes.
 
 ## Overview
 Uses `getRandomJob()` from `@internwave/scrapers-api` to generate a certain number of random jobs.
