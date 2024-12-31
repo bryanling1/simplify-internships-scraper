@@ -2,7 +2,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: ["src/index.ts"],
-  format: ["cjs"], // Build for commonJS and ESmodules\
+  format: ["cjs"],
   splitting: false,
   sourcemap: true,
   noExternal: [ /(.*)/ ],

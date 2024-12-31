@@ -6,16 +6,21 @@
   "scripts": {
     "build": "yarn copyREADME && yarn copyCHANGELOG && tsup --publicDir --watch",
     "copyREADME": "copyfiles README.md public",
-    "copyCHANGELOG": "copyfiles CHANGELOG.md public"
+    "copyCHANGELOG": "copyfiles CHANGELOG.md public",
+    "test": "vitest --config vitest.config.mts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "copyfiles": "^2.4.1",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^2.1.8"
   },
   "dependencies": {
-    "@internwave/scrapers-api": "^1.0.0",
+    "@internwave/scrapers-api": "^1.0.1",
+    "moment": "^2.30.1",
+    "puppeteer-core": "^23.11.1",
     "tsup": "^8.2.4"
   },
   "engines": {

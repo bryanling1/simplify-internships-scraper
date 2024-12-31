@@ -1,16 +1,10 @@
 {
-    "name": "Test Scraper", 
+    "name": "Simplify internships", 
     "image": "logo.png", 
-    "originURL": "https://internwave.com", 
-    "sourceURL": "https://github.com/bryanling1/internwave-test-scraper",
-    "lastUpdated": 123123123123,
+    "originURL": "https://github.com/SimplifyJobs/Summer2025-Internships", 
+    "sourceURL": "https://github.com/bryanling1/simplify-internships-scraper",
+    "lastUpdated": 1735233169556,
     "main": "index.js",
-    "options" : [
-        {
-            "label": "Jobs to generate",
-            "type": "Select",
-            "selectOptions": ["10", "50", "100", "1000", "10000" ]
-        }
-    ],
+    "options" : [],
     "version": "1.0.0"
 }

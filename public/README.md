@@ -1,8 +1,8 @@
-# InternWave Desktop Test scraper
-A bare minimum "scraper" for [InternWave Desktop](https://internwave.com/) to be used for devleopment purposes.
+# Simplify Interships scraper
+A scraper for Simplify's GitHub repo of internships.
+Source: https://github.com/SimplifyJobs/Summer2025-Internships
 
 ## Overview
-Uses `getRandomJob()` from `@internwave/scrapers-api` to generate a certain number of random jobs.
 
 ## Development
 
