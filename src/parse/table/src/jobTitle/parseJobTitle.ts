@@ -4,10 +4,10 @@ import { Strings } from "src/constants/Strings";
 export const parseJobTitle = async (
   td?: ElementHandle<HTMLTableCellElement>,
 ): Promise<
-  | {
+  {
       jobTitle: string;
       specialRequirements: string[];
-    }
+  }
   | undefined
 > => {
   let jobTitle = await td?.evaluate((td) => td.innerText);

@@ -1,4 +1,4 @@
-import { parseLocation } from "src/parse/location/parseLocation";
+import { parseLocation } from "src/parse/table/src/location/parseLocation";
 import { describe, expect, test } from "vitest";
 
 describe("parseLocation.test.ts", () => {

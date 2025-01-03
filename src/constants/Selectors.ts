@@ -14,5 +14,10 @@ export const Selectors = {
                 industry: "div.flex.flex-col.gap-4.lg\\:w-1\\/2.xl\\:w-2\\/5 > div.mb-1.flex.flex-wrap.gap-2.text-sm.text-secondary-400 div"
             }
         }
+    },
+    jobTable: {
+        table1: "markdown-accessiblity-table",
+        table2: "markdown-accessibility-table",
+        rows: (column: 4 | 5) => `table tbody tr:has(td:nth-child(${column}) a[href])`
     }
 }

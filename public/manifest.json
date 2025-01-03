@@ -5,6 +5,11 @@
     "sourceURL": "https://github.com/bryanling1/simplify-internships-scraper",
     "lastUpdated": 1735233169556,
     "main": "index.js",
-    "options" : [],
+    "options" : [{
+        "label": "Collection",
+        "type": "Select",
+        "selectOptions": ["Summer internships", "Off-season internships", "New-grad"],
+        "required": true
+    }],
     "version": "1.0.0"
 }

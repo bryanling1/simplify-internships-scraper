@@ -1,12 +1,8 @@
 import { ILocation } from "@internwave/scrapers-api";
 import { ElementHandle } from "puppeteer-core";
+import { IParser, parse } from "src/lib/parse/parse";
 
-interface ILocationParser {
-  regex: RegExp;
-  parser: (groups: RegExpMatchArray) => ILocation | undefined;
-}
-
-export const locationParsers: ILocationParser[] = [
+const locationParsers: IParser<ILocation>[] = [
   {
     regex: /^(san [a-zA-Z]+)$/i,
     parser: (groups: RegExpMatchArray) => {
@@ -156,8 +152,14 @@ export const locationParsers: ILocationParser[] = [
 ];
 
 export const parseLocation = async (
+  text?: string,
+) => {
+  return parse(text, locationParsers);
+};
+
+
+export const parseLocationFromTd = async (
   td?: ElementHandle<HTMLTableCellElement>,
-  parsers: ILocationParser[] = locationParsers,
 ): Promise<ILocation | undefined> => {
   const text = (
     await td?.evaluate((td) => {
@@ -172,11 +174,7 @@ export const parseLocation = async (
   if (!text) {
     return undefined;
   }
-  for (const parser of parsers) {
-    const match = text.match(parser.regex);
-    if (match) {
-      const out = parser.parser(match);
-      return out;
-    }
-  }
+  return parseLocation(text);
 };
+
+

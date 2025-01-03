@@ -5,9 +5,9 @@ import { parseDatePosted } from "src/parse/table/src/datePosted/parseDatePosted"
 import { parseJobTitle } from "src/parse/table/src/jobTitle/parseJobTitle";
 import { parseLocationFromTd } from "src/parse/table/src/location/parseLocation";
 import { parseLinks } from "src/parse/table/src/links/parseLinks";
-import { Collection } from "src/constants/types";
+import { parseTerms } from "src/parse/table/src/terms/parseTerms";
 
-export const parseTableRow = (type: Collection) => async (
+export const parseOffSeasonTableRow = async (
   row: ElementHandle<Element>,
   previousCompany: string,
 ): Promise<IScrapedJob | undefined> => {
@@ -16,20 +16,24 @@ export const parseTableRow = (type: Collection) => async (
     company,
     jobTitleProps,
     location,
+    terms,
     links,
     postedAt,
-  ] = await Promise.all([
+  ]  = await Promise.all([
     parseCompany(previousCompany, tds[0]),
     parseJobTitle(tds[1]),
     parseLocationFromTd(tds[2]),
-    parseLinks(tds[3]),
-    parseDatePosted(tds[4])
-  ]);
+    parseTerms(tds[3]),
+    parseLinks(tds[4]),
+    parseDatePosted(tds[5])
+  ]
+  )
   const applyURL = links?.[0]?.url
-  if (!applyURL ||!company || !jobTitleProps) {
+  if (!applyURL || !company || !jobTitleProps) {
     return;
   }
   const { jobTitle, specialRequirements } = jobTitleProps;
+
   const job: IScrapedJob = {
     id: applyURL,
     company: {
@@ -46,7 +50,12 @@ export const parseTableRow = (type: Collection) => async (
     location,
     jobTitle,
     links: links.length ? links : undefined,
-    jobType: type === Collection.NewGrad ? ["New grad"] : ["Internship"],
+    jobType: ["Internship"],
+    descriptions: terms?.length ? [{
+      title: "Available terms",
+      content: terms.map(term => term.term).join(", "),
+      type: "Description"
+    }] : undefined,
   };
 
   return job;

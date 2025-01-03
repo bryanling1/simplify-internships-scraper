@@ -1,23 +1,46 @@
 import { IScrapedJob, ProgressReporter } from "@internwave/scrapers-api";
-import { Page } from "puppeteer-core";
+import { ElementHandle, Page } from "puppeteer-core";
+import { Links } from "src/constants/Links";
+import { Selectors } from "src/constants/Selectors";
+import { Collection } from "src/constants/types";
+import { parseOffSeasonTableRow } from "src/parse/table/src/tableRow/parseOffSeasonTableRow";
 import { parseTableRow } from "src/parse/table/src/tableRow/parseTableRow";
 
-const BASE_URL = "https://github.com/SimplifyJobs/Summer2025-Internships";
-
-export const parseTable = async (
+export const parseTableByCollection = async (
   page: Page,
   progressReporter: ProgressReporter,
+  collection?: string
+)=>{
+  switch(collection){
+    case Collection.OffSeason:
+      return parseTable(page, progressReporter, parseOffSeasonTableRow, Links.offSeason, 5)
+    case Collection.NewGrad:
+      return parseTable(page, progressReporter, parseTableRow(Collection.NewGrad), Links.newGrad )
+    default:
+      return parseTable(page, progressReporter, parseTableRow(Collection.Summer), Links.summer)
+  }
+}
+
+const parseTable = async (
+  page: Page,
+  progressReporter: ProgressReporter,
+  parseTableRow: (
+    row: ElementHandle<Element>,
+    previousCompany: string,
+  )=>Promise<IScrapedJob | undefined>,
+  url: string,
+  linksColumn: 4 | 5 = 4,
 ) => {
   const out: IScrapedJob[] = [];
-  await page.goto(BASE_URL);
+  await page.goto(url);
   const table = await Promise.race([
-    page.waitForSelector("markdown-accessiblity-table").catch(),
-    page.waitForSelector("markdown-accessibility-table").catch(),
+    page.waitForSelector(Selectors.jobTable.table1).catch(),
+    page.waitForSelector(Selectors.jobTable.table2).catch(),
   ]);
   if (!table) {
     throw "Could not locate table";
   }
-  const rows = (await table.$$("table tbody tr:has(td:nth-child(4) a[href])")).slice(0, 20);
+  const rows = (await table.$$(Selectors.jobTable.rows(linksColumn)))
   progressReporter.nextStep("Scraping table", rows.length);
   let prevCompany: string = "";
   for (const [i, row] of rows.entries()) {
